@@ -122,28 +122,63 @@ function haberYapici(haberler) {
   const haberBaslik = document.createElement("h2");
   haberBaslik.textContent = haberler.baslik;
 
+  const tarih = document.createElement("p");
+  tarih.textContent = haberler.tarih;
+
   const paragraf_1 = document.createElement("p");
-  paragraf_1.className = "tarih";
   paragraf_1.textContent = haberler.ilkParagraf;
 
   const paragraf_2 = document.createElement("p");
-  paragraf_2.className = "tarih";
   paragraf_2.textContent = haberler.ilkParagraf;
 
   const paragraf_3 = document.createElement("p");
-  paragraf_3.className = "tarih";
   paragraf_3.textContent = haberler.ilkParagraf;
 
   const btn = document.createElement("button");
   btn.className = "expandButton";
   btn.textContent = "+";
-  btn.addEventListener("");
+  btn.addEventListener("click", (e) => {
+    // haberDiv.classList.toggle("article-open");
+    e.target.parentElement.classList.toogle("article-open");
+  });
 
-  haberDiv.appendChild(haberBaslik);
-  haberDiv.appendChild(paragraf_1);
-  haberDiv.appendChild(paragraf_2);
-  haberDiv.appendChild(paragraf_3);
-  haberDiv.appendChild(btn);
+  haberDiv.append(haberBaslik, tarih, paragraf_1, paragraf_2, paragraf_3);
+  // haberDiv.append(haberBaslik);
+  // haberDiv.append(paragraf_1);
+  // haberDiv.append(paragraf_2);
+  // haberDiv.append(paragraf_3);
+  // haberDiv.append(btn);
 
   return haberDiv;
 }
+
+const yHaber = {
+  baslik: "Ekonoomi",
+  tarih: "23 Ağustos 2023",
+  ilkParagraf:
+    "loremHodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor,",
+  ikinciParagraf:
+    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, quibusdam Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem rerum cumque aliquid laborum adipisci temporibus accusamus rem eveniet. Nulla, quae.",
+  ucuncuParagraf:
+    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, quibusdam Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem rerum cumque aliquid laborum adipisci temporibus accusamus rem eveniet. Nulla, quae.",
+};
+data.push(yHaber);
+
+const haberlerDiv = document.querySelector(".articles");
+
+data.forEach((haber) => {
+  const haberDiv = haberYapici(haber);
+  haberlerDiv.appendChild(haberDiv);
+});
+
+// const haberler = document.querySelector(".articles");
+
+// data.forEach((h) => {
+//   const haberDiv = haberYapici(h);
+//   haberler.appendChild(haberDiv);
+// });
+
+// for (let i of data) {
+//   const haber = haberYapici(i);
+//   haberler.append(haber);
+// }
