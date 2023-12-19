@@ -103,7 +103,7 @@ const data = [
 
     <button class="expandButton">+</button>
   </div>
-  
+
   Adım 2: Hala `haberYapici` içindeyiz, button.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
 
@@ -115,70 +115,47 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
-function haberYapici(haberler) {
-  const haberDiv = document.createElement("div");
-  haberDiv.classList.add("article");
 
-  const haberBaslik = document.createElement("h2");
-  haberBaslik.textContent = haberler.baslik;
+function haberYapici(data) {
+  const divCreate = document.createElement("div");
+  divCreate.classList.add("article");
 
-  const tarih = document.createElement("p");
-  tarih.textContent = haberler.tarih;
+  const h2 = document.createElement("h2");
+  h2.textContent = data.baslik;
 
-  const paragraf_1 = document.createElement("p");
-  paragraf_1.textContent = haberler.ilkParagraf;
+  const p = document.createElement("p");
+  p.className = "tarih";
+  p.textContent = data.tarih;
 
-  const paragraf_2 = document.createElement("p");
-  paragraf_2.textContent = haberler.ilkParagraf;
+  const p1 = document.createElement("p");
+  p1.textContent = data.ilkParagraf;
 
-  const paragraf_3 = document.createElement("p");
-  paragraf_3.textContent = haberler.ilkParagraf;
+  const p2 = document.createElement("p");
+  p2.textContent = data.ikinciParagraf;
+
+  const p3 = document.createElement("p");
+  p3.textContent = data.ucuncuParagraf;
 
   const btn = document.createElement("button");
-  btn.className = "expandButton";
+  btn.setAttribute("class", "expandButton");
   btn.textContent = "+";
-  btn.addEventListener("click", (e) => {
-    // haberDiv.classList.toggle("article-open");
-    e.target.parentElement.classList.toogle("article-open");
+
+  btn.addEventListener("click", (event) => {
+    divCreate.classList.toggle("article-open");
   });
 
-  haberDiv.append(haberBaslik, tarih, paragraf_1, paragraf_2, paragraf_3);
-  // haberDiv.append(haberBaslik);
-  // haberDiv.append(paragraf_1);
-  // haberDiv.append(paragraf_2);
-  // haberDiv.append(paragraf_3);
-  // haberDiv.append(btn);
+  divCreate.appendChild(h2);
+  divCreate.appendChild(p);
+  divCreate.appendChild(p1);
+  divCreate.appendChild(p2);
+  divCreate.appendChild(p3);
+  divCreate.appendChild(btn);
 
-  return haberDiv;
+  return divCreate;
 }
 
-const yHaber = {
-  baslik: "Ekonoomi",
-  tarih: "23 Ağustos 2023",
-  ilkParagraf:
-    "loremHodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor,",
-  ikinciParagraf:
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, quibusdam Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem rerum cumque aliquid laborum adipisci temporibus accusamus rem eveniet. Nulla, quae.",
-  ucuncuParagraf:
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, quibusdam Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem rerum cumque aliquid laborum adipisci temporibus accusamus rem eveniet. Nulla, quae.",
-};
-data.push(yHaber);
-
-const haberlerDiv = document.querySelector(".articles");
-
-data.forEach((haber) => {
-  const haberDiv = haberYapici(haber);
-  haberlerDiv.appendChild(haberDiv);
-});
-
-// const haberler = document.querySelector(".articles");
-
-// data.forEach((h) => {
-//   const haberDiv = haberYapici(h);
-//   haberler.appendChild(haberDiv);
-// });
-
-// for (let i of data) {
-//   const haber = haberYapici(i);
-//   haberler.append(haber);
-// }
+const divContainer = document.querySelector(".articles");
+for (let i of data) {
+  const haber = haberYapici(i);
+  divContainer.append(haber);
+}
